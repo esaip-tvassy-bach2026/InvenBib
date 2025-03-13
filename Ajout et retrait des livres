@@ -42,6 +42,9 @@ public:
 
     // Méthode pour retirer un livre
     void retirerLivre(int id);
+
+    // Méthode pour modifier un livre existant
+    void modifierLivre(int id, const std::string& nouveauTitre, const std::string& nouvelAuteur, int nouvelleAnnee);
 };
 
 // Implémentation de la méthode pour ajouter un livre
@@ -96,14 +99,45 @@ void Librairie::retirerLivre(int id) {
     sqlite3_finalize(stmt);
 }
 
+// Implémentation de la méthode pour modifier un livre existant
+void Librairie::modifierLivre(int id, const std::string& nouveauTitre, const std::string& nouvelAuteur, int nouvelleAnnee) {
+    // Prépare une requête SQL pour mettre à jour les informations d'un livre par son ID
+    std::string sql = "UPDATE livres SET titre = ?, auteur = ?, annee = ? WHERE id = ?;";
+    sqlite3_stmt* stmt;
+
+    // Prépare la déclaration SQL
+    if (sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK) {
+        // Lie les nouveaux paramètres à la requête
+        sqlite3_bind_text(stmt, 1, nouveauTitre.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_text(stmt, 2, nouvelAuteur.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int(stmt, 3, nouvelleAnnee);
+        sqlite3_bind_int(stmt, 4, id);
+
+        // Exécute la requête
+        if (sqlite3_step(stmt) != SQLITE_DONE) {
+            std::cerr << "Erreur lors de la modification du livre : " << sqlite3_errmsg(db) << std::endl;
+        } else {
+            std::cout << "Livre modifié avec succès." << std::endl;
+        }
+    } else {
+        std::cerr << "Erreur de préparation de la requête : " << sqlite3_errmsg(db) << std::endl;
+    }
+
+    // Finalise la déclaration (libère les ressources)
+    sqlite3_finalize(stmt);
+}
+
 int main() {
     // Crée une instance de la classe Librairie
     Librairie lib;
 
     // Exemples d'utilisation
-    lib.ajouterLivre("1984", "George Orwell", 1949);
-    lib.ajouterLivre("Le Petit Prince", "Antoine de Saint-Exupéry", 1943);
-    lib.retirerLivre(1);  // Retire le livre avec l'ID 1
+    lib.ajouterLivre("1984", "George Orwell", 1949);                 // Ajoute un livre
+    lib.ajouterLivre("Le Petit Prince", "Antoine de Saint-Exupéry", 1943); // Ajoute un autre livre
+
+    lib.modifierLivre(1, "Animal Farm", "George Orwell", 1945);      // Modifie le livre avec l'ID 1
+
+    lib.retirerLivre(2);                                             // Retire le livre avec l'ID 2
 
     return 0;
 }
