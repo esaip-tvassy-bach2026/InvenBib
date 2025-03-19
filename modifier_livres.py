@@ -12,10 +12,10 @@ class Librairie:
         if hasattr(self, 'conn'):
             self.conn.close()
 
-    def modifier_livre(self, id, nouveau_titre, nouvel_auteur, nouvelle_annee):
-        sql = "UPDATE livres SET titre = ?, auteur = ?, annee = ? WHERE id = ?"
+    def modifier_livre(self, isbn, nouveau_titre, nouvel_auteur, nouvelle_annee):
+        sql = "UPDATE livres SET titre = ?, auteur = ?, annee = ? WHERE isbn = ?"
         try:
-            self.cursor.execute(sql, (nouveau_titre, nouvel_auteur, nouvelle_annee, id))
+            self.cursor.execute(sql, (nouveau_titre, nouvel_auteur, nouvelle_annee, isbn))
             self.conn.commit()
             print("Livre modifié avec succès.")
         except sqlite3.Error as e:
@@ -23,6 +23,6 @@ class Librairie:
 
 def test2(): // Test pour verifier que ça fonctionne
     lib = Librairie()
-    lib.modifier_livre(1, "Animal Farm", "George Orwell", 1945)
+    lib.modifier_livre(int(7777), "Animal Farm", "George Orwell", int(1945))
 
 test()
