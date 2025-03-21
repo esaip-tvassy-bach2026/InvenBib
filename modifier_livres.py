@@ -21,8 +21,8 @@ class Librairie:
         except sqlite3.Error as e:
             print(f"Erreur lors de la modification du livre : {e}")
 
-def test2(): // Test pour verifier que ça fonctionne
+def test2(): # Test pour verifier que ça fonctionne
     lib = Librairie()
     lib.modifier_livre(int(7777), "Animal Farm", "George Orwell", int(1945))
 
-test()
+# test()
