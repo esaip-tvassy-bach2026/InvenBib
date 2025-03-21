@@ -8,7 +8,7 @@ def afficher_menu():
     print("4. Afficher tous les clients")
     print("5. Quitter\n")
 
-def main():
+def menu_client():
     gestion_clients = GestionClients()
 
     while True:
@@ -45,5 +45,5 @@ def main():
         else:
             print("Choix non valide, veuillez réessayer.")
 
-if __name__ == "__main__":
-    main()
+#menu_client()
+
