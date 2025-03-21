@@ -45,5 +45,5 @@ def menu_client():
         else:
             print("Choix non valide, veuillez réessayer.")
 
-#menu_client()
+# menu_client()
 
