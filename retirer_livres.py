@@ -12,17 +12,17 @@ class Librairie:
         if hasattr(self, 'conn'):
             self.conn.close()
 
-    def retirer_livre(self, id):
+    def retirer_livre(self, isbn):
         sql = "DELETE FROM livres WHERE id = ?"
         try:
-            self.cursor.execute(sql, (id,))
+            self.cursor.execute(sql, (isbn,))
             self.conn.commit()
             print("Livre retiré avec succès.")
         except sqlite3.Error as e:
             print(f"Erreur lors du retrait du livre : {e}")
 
-def test3(): // Petit test pour vérifier que ça marche
+def test3(): # Petit test pour vérifier que ça marche
     lib = Librairie()
     lib.retirer_livre(1)  # Supprime le livre avec l'ID 1 (exemple)
 
-test3()
+# test3()
