@@ -30,9 +30,9 @@ class Librairie:
         except sqlite3.Error as e:
             print(f"Erreur lors de l'ajout du livre : {e}")
 
-def test(): // Test pour verifier que ca marche
+def test(): # Test pour verifier que ca marche
     lib = Librairie()
     lib.ajouter_livre(int(444444444444),"1984", "George Orwell", int(1949))
     lib.ajouter_livre(int(676676767),"Le Petit Prince", "Antoine de Saint-Exupéry", int(1943))
 
-test()
+# test()
