@@ -41,7 +41,7 @@ class Librairie:
             return False
 
 # Remplacez par votre clé API Mistral
-API_KEY = "YOUR_MISTRAL_API_KEY"
+API_KEY = "Mu3ZznNkoOtZvoz3sB9xjubCXzsqGEwQ"
 
 def modifier_livre_avec_mistral(librairie, message):
     """Utilise Mistral pour extraire les informations du livre du message et le modifie."""
