@@ -3,6 +3,8 @@
 name: Analyze the code
 env:
   MISTRAL_ENV: production
+
+# Vérification pour la branche main et les tags de versions
 on:
   push:
     tags: [ v* ]
@@ -10,6 +12,7 @@ on:
   pull_request:
     tags: [ v* ]
     branches: [ main ]
+
 jobs:
   lint-and-test:
     runs-on: windows-latest
