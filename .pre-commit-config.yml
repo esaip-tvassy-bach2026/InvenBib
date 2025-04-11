@@ -27,6 +27,12 @@ repos:
     hooks:
       - id: mypy
         args: [--ignore-missing-imports]
+  // Utilisation de Gitleaks pour verifier les cles API
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.1
+    hooks:
+      - id: gitleaks
+        args: [--config-path=.gitleaks.toml]
   // Utilisation de l'analyse en local lors d'un eventuel clone du repository
   - repo: local
     hooks:
@@ -38,4 +44,4 @@ repos:
         always_run: true
 
 // Exclusion des documents "non-python"
-exclude: ^(DOCUMENTS_ENSEIGNANT/|livrables_premier_cours/|\.github/|\.env)
+exclude: ^(DOCUMENTS_ENSEIGNANT/|\.github/|\.env)
