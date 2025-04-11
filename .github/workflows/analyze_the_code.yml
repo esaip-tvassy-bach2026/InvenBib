@@ -1,3 +1,4 @@
+# Cree par Thomas VASSY--ROUSSEAU.
 # GitHub Actions code analyzer
 name: Analyze the code
 on:
