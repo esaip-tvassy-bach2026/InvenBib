@@ -3,7 +3,11 @@
 
 # Ne pas importer les paramètres d'analyse et GitHub Actions
 .pre-commit-config.yml
-.github/workflows/*
+.github/workflows/
+*.key
+__pycache__/
+.gitleaks.toml
+*.secret
 
 # Ne pas importer le fichier .env contenant les clés API nécessaires à notre projet.
 .env
