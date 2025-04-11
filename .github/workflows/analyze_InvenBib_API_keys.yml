@@ -3,7 +3,13 @@
 name: Analyze InvenBib API keys
 
 # Verification pour toutes les branches
-on: [push, pull_request]
+on:
+  push:
+    tags: [ v* ]
+    branches: []
+  pull_request:
+    tags: [ v* ]
+    branches: []
 
 jobs:
   secret-scan:
