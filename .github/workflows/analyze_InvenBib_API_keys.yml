@@ -2,7 +2,7 @@
 # GitHub Actions API analyzer
 name: Analyze InvenBib API keys
 
-# Verification pour toutes les branches
+# Verification pour toutes les branches et les tags de version
 on:
   push:
     tags: [ v* ]
