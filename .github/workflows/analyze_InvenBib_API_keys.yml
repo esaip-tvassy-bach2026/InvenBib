@@ -1,0 +1,46 @@
+# Cree par Thomas VASSY--ROUSSEAU.
+# GitHub Actions API analyzer
+name: Analyze InvenBib API keys
+
+# Verification pour toutes les branches
+on: [push, pull_request]
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    environment: secrets-verification
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Import de la librairie GitHub Analyze
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Installation de Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Mise en place de Gitleaks
+        uses: gitleaks/gitleaks-action@v2.5.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lancement du scan
+        run: |
+          gitleaks detect --source=. --exit-code=1 \
+          --config-path=.gitleaks.toml \
+          --report-format=sarif \
+          --report-path=gitleaks-report.sarif
+      - name: Chargement de SARIF pour le reporting
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: gitleaks-report.sarif
+      - name: Vérification du .env
+        run: |
+          if grep -rE "(API_KEY|SECRET_KEY|MISTRAL_API_KEY)" --exclude=.env --exclude=*.toml .; then
+            echo "::error::Des clés API ont été détectées dans des fichiers non protégés !"
+            exit 1
+          fi
