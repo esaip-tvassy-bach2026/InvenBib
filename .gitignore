@@ -9,6 +9,8 @@
 __pycache__/
 .gitleaks.toml
 *.secret
+requirements.in
+requirements.txt
 
 # Ne pas importer le fichier .env contenant les clés API nécessaires à notre projet.
 .env
