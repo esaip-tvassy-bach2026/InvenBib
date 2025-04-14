@@ -43,7 +43,7 @@ jobs:
       - name: Chargement de SARIF pour le reporting
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: gitleaks-report.sarif
+          sarif_file: gitleaks-report-${{ matrix.python-version }}.sarif
       - name: Vérification du .env
         run: |
           if grep -rE "(API_KEY|SECRET_KEY|MISTRAL_API_KEY)" --exclude=.env --exclude=*.toml .; then
