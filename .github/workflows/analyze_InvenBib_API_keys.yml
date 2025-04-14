@@ -36,7 +36,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Lancement du scan
         run: |
-          gitleaks detect --source=. --exit-code=1 \
+          gitleaks detect --source=. --exit-code=1
           --config-path=.gitleaks.toml \
           --report-format=sarif \
           --report-path=gitleaks-report.sarif
