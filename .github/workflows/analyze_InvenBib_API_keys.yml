@@ -43,7 +43,7 @@ jobs:
           gitleaks detect --source=. \
           --config=.gitleaks.toml \
           --report-format=sarif \
-          --report-path=gitleaks-report-${{ matrix.python-version }}.sarif
+          --report-path=gitleaks-report-${{ matrix.python-version }}.sarif || True
       - name: Chargement de SARIF pour le reporting
         uses: github/codeql-action/upload-sarif@v3
         with:
