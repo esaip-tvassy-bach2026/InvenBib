@@ -34,8 +34,9 @@ jobs:
       - name: Mise en place de Gitleaks
         run: |
           curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/tag/v8.24.3/download/gitleaks-linux-amd64.tar.gz
-          tar -xf gitleaks.tar.gz -C /usr/local/bin gitleaks
-          chmod +x /usr/local/bin/gitleaks
+          file gitleaks.tar.gz
+          # tar -xf gitleaks.tar.gz -C /usr/local/bin gitleaks
+          # chmod +x /usr/local/bin/gitleaks
       - name: Vérification de l'installation de Gitleaks
         run: gitleaks version
       - name: Lancement du scan
