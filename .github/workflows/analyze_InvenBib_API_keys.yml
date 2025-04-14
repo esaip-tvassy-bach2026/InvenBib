@@ -40,7 +40,7 @@ jobs:
         run: gitleaks version
       - name: Lancement du scan
         run: |
-          gitleaks dir --source=. \
+          gitleaks detect --source=. \
           --config=.gitleaks.toml \
           --report-format=sarif \
           --report-path=gitleaks-report-${{ matrix.python-version }}.sarif
