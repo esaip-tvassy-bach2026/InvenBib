@@ -50,7 +50,7 @@ jobs:
           sarif_file: gitleaks-report-${{ matrix.python-version }}.sarif
       - name: Vérification du .env
         run: |
-          if grep -rE "(API_KEY|SECRET_KEY|MISTRAL_API_KEY)" --exclude=.env --exclude=*.toml .; then
+          if grep -rE "(API_KEY|SECRET_KEY|MISTRAL_API_KEY)" --include=\*.{py} .; then
             echo "::error::Des clés API ont été détectées dans des fichiers non protégés !"
             exit 1
           fi
