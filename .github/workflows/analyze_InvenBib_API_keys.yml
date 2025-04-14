@@ -18,6 +18,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
+    # Mise à jour des permissions pour afficher les évènements de sécurité et lire les fichiers.
     permissions:
       contents: read
       security-events: write
@@ -30,20 +31,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Mise en place de Gitleaks
+        run: |
+          curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/tag/v8.24.3/download/gitleaks-linux-amd64.tar.gz
+          tar -xzf gitleaks.tar.gz -C /usr/local/bin gitleaks
+          chmod +x /usr/local/bin/gitleaks
+      - name: Vérification de l'installation de Gitleaks
+        run: gitleaks version
+      - name: Lancement du scan
+        run: |
+          gitleaks dir --source=. \
+          --config=.gitleaks.toml \
+          --report-format=sarif \
+          --report-path=gitleaks-report-${{ matrix.python-version }}.sarif
       - name: Chargement de SARIF pour le reporting
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: gitleaks-report-${{ matrix.python-version }}.sarif
-      - name: Mise en place de Gitleaks
-        uses: gitleaks/gitleaks-action@v2.3.7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Lancement du scan
-        run: |
-          gitleaks detect --source=. --exit-code=1
-          --config-path=.gitleaks.toml \
-          --report-format=sarif \
-          --report-path=gitleaks-report-${{ matrix.python-version }}.sarif
       - name: Vérification du .env
         run: |
           if grep -rE "(API_KEY|SECRET_KEY|MISTRAL_API_KEY)" --exclude=.env --exclude=*.toml .; then
