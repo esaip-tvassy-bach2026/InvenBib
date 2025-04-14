@@ -29,7 +29,7 @@ repos:
         args: [--ignore-missing-imports]
   // Utilisation de Gitleaks pour verifier les cles API
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.16.1
+    rev: v8.24.3
     hooks:
       - id: gitleaks
         args: [--config-path=.gitleaks.toml]
@@ -44,4 +44,4 @@ repos:
         always_run: true
 
 // Exclusion des documents "non-python"
-exclude: ^(DOCUMENTS_ENSEIGNANT/|\.github/|\.env)
+exclude: ^(DOCUMENTS_ENSEIGNANT/|\.github/|\.env|\.gitignore)
