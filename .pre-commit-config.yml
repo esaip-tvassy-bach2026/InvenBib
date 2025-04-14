@@ -44,4 +44,4 @@ repos:
         always_run: true
 
 // Exclusion des documents "non-python"
-exclude: ^(DOCUMENTS_ENSEIGNANT/|\.github/|\.env|\.gitignore)
+exclude: ^(DOCUMENTS_ENSEIGNANT/|\.github/|\.env|\.gitignore|\requirements.txt|\requirements.in|\*.key|\__pycache__|\*.secret)
