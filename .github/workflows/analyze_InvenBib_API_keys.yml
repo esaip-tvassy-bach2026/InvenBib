@@ -33,10 +33,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Mise en place de Gitleaks
         run: |
-          curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/tag/v8.24.3/download/gitleaks-linux-amd64.tar.gz
-          file gitleaks.tar.gz
-          # tar -xf gitleaks.tar.gz -C /usr/local/bin gitleaks
-          # chmod +x /usr/local/bin/gitleaks
+          curl -sSL -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz
+          tar -xzf gitleaks.tar.gz -C /usr/local/bin gitleaks
+          chmod +x /usr/local/bin/gitleaks
       - name: Vérification de l'installation de Gitleaks
         run: gitleaks version
       - name: Lancement du scan
