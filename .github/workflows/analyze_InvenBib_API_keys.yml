@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Mise en place de Gitleaks
-        uses: gitleaks/gitleaks-action@v2.5.0
+        uses: gitleaks/gitleaks-action@v2.3.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Lancement du scan
