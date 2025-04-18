@@ -2,11 +2,8 @@
 # Ce fichier contient la liste de l'ensemble des bibliothèques nécessaires afin qu'InvenBib fonctionne.
 # Il permet au CI/CD GitHub Actions que j'ai créé de savoir quelles dépendances sont nécessaires afin d'analyser le code.
 
-# Base de données
-sqlite3
 # Appel et communication avec l'API
 requests
-# Bibliothèque permettant de générer des données au hasard
-random
+
 # Bibliothèque permettant de gérer le .env dans Python
 python-dotenv
