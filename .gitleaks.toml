@@ -1,0 +1,18 @@
+# Cree par Thomas VASSY--ROUSSEAU.
+# Ce fichier contient la configuration de Gitleaks.
+title="InvenBib API key in clear text detection"
+
+[[rules]]
+id = "mistral-api-key"
+description = "The Mistral AI API key"
+regex = '''(?i)mistral[_-]?api[_-]?key["' ]*[:=][ "' ]*[a-z0-9]{32}'''
+tags = ["api-key", "mistral"]
+
+[[rules]]
+id = "other-api-keys"
+description = "Other API keys to detect"
+regex = '''(?i)(api[_-]?key|secret[_-]?key)["' ]*[:=][ "' ]*[a-z0-9]{32,64}'''
+tags = ["api-key", "secret"]
+
+[allowlist]
+paths = [".env", ".gitignore", ".pre-commit-config.yml", "requirements.txt", "requirements.in", ".github", "__pycache__", "DOCUMENTS_ENSEIGNANT"]
